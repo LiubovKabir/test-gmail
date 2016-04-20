@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<startup>
+		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
+	</startup>
+	<appSettings>
+	<add key="driverPath" value="Path to chromedriver.exe"/>
+	<add key="browser" value="Firefox"/>
+	<add key="url" value="http://gmail.com"/>
+	<add key="username" value="username@gmail.com"/>
+	<add key="password" value="password"/>
+	<add key="test_to_run" value="ALL"/>
+	<add key="logging" value="on"/>
+	<add key="test_message" value="last received message subject"/>
+	</appSettings>
+</configuration>

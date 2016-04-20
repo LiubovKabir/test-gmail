@@ -1,0 +1,4 @@
+Test Run Summary:
+20.04.2016 8:54:08
+"send email" test:OK
+"receive email" test: OK
