@@ -4,12 +4,19 @@ This application provides two tests for Google Mail service (gmail.com) function
 Set up TestMail.exe.conf file - modify TestMail.exe.conf.sample and save as TestMail.exe.conf. Configuration file must be stored in the same folder where .exe file is.
 
 Parameters (key values) to be set:
+
 driverPath = Path to chromedriver.exe
+
 browser = one of two predefined names of browsers - Firefox or Chrome (Default browser to be run is Firefox)
+
 username = email address for Gmail
+
 password = password
+
 test_to_run = name of test to run or ALL
+
 logging = type 'on' to enable logging or leave empty to disable
+
 test_message = the last received message subject
 
 Available tests to run:
