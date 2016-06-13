@@ -14,13 +14,9 @@ username = email address for Gmail
 password = password
 
 test_to_run = name of test to run or ALL
-<<<<<<< HEAD
+
 logging = type 'true' to enable logging or 'false' to disable
-=======
 
-logging = type 'on' to enable logging or leave empty to disable
-
->>>>>>> 0df1e1cd9859c3616ab55ef17a88fe2c20a7eb97
 test_message = the last received message subject
 
 Available tests to run:
