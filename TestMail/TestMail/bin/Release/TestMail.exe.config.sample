@@ -10,7 +10,7 @@
 	<add key="username" value="username@gmail.com"/>
 	<add key="password" value="password"/>
 	<add key="test_to_run" value="ALL"/>
-	<add key="logging" value="on"/>
+	<add key="logging" value="true"/>
 	<add key="test_message" value="last received message subject"/>
 	</appSettings>
 </configuration>

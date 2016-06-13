@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Configuration;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
+
 namespace TestMail
 {
     class Program
     {
 
-        public static Dictionary<string, string> settings;
+        public static Dictionary<string, string> Settings;
+        public const string LOG_PATH = "test-log.txt";
+        public const string SEND_EMAIL_TEST = "send_email";
+        public const string RECEIVE_EMAIL_TEST = "receive_email";
 
 
         static void Main(string[] args)
@@ -28,40 +30,48 @@ namespace TestMail
                 Console.WriteLine("Error reading app settings");
                 return;
             }
-            if (settings.Count == 0)
+            if (Settings.Count == 0)
             {
                 return;
             }
-            Tests testrun = new Tests();
-            testrun.TestLog.AppendLine("Test Run Summary:");
-            testrun.TestLog.AppendLine(DateTime.Now.ToString());
-            switch (settings["test_to_run"])
+            Browser browser = new Browser();    //start new Browser session
+            if (browser.Driver != null)
             {
-                case "send_email":
-                    testrun.SendEmail();
-                    break;
-                case "receive_email":
-                    testrun.ReceiveEmail();
-                    break;
-                default:
-                    testrun.SendEmail();
-                    if (testrun.EmailIsSent)
+                Tests testrun = new Tests(browser);
+                //Logging added
+                Logger.WriteLine(new[] { "Test Run Summary:", DateTime.Now.ToString() });                
+                try
+                {
+                    switch (Settings["test_to_run"].ToLower())
                     {
-                        testrun.ReceiveEmail();
+                        case SEND_EMAIL_TEST:
+                            testrun.SendEmail();
+                            break;
+                        case RECEIVE_EMAIL_TEST:
+                            testrun.ReceiveEmail();
+                            break;
+                        default:
+                            testrun.SendEmail();
+                            if (testrun.EmailIsSent)
+                            {
+                                testrun.ReceiveEmail();
+                            }
+                            break;
                     }
-                    break;
-            }
-            Console.WriteLine("Test Run finished");
-            if (settings["logging"].Equals("on"))
-            {
-                File.WriteAllText("test-log.txt", testrun.TestLog.ToString());
+                    Console.WriteLine("Test Run finished");
+                    Logger.WriteLine(new[] { "---- DONE ----" });
+                }
+                finally
+                {
+                    browser.Quit();
+                }                
             }
         }
 
         static Dictionary<string, string> ReadAppSettings(string filePath)
         {
             // Get the settings collection (key/value pairs).
-            settings = new Dictionary<string, string>();
+            Settings = new Dictionary<string, string>();
             AppSettingsSection appSettings;
             ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap();
             fileMap.ExeConfigFilename = filePath;
@@ -74,12 +84,12 @@ namespace TestMail
                 foreach (string key in appSettings.Settings.AllKeys)
                 {
                     string value = appSettings.Settings[key].Value;
-                    settings.Add(key, value);
+                    Settings.Add(key, value);
                 }
             }
             else
                 Console.WriteLine("The appSettings section is empty. Please check your configuration file.");
-            return settings;
+            return Settings;
         }
     }
 }

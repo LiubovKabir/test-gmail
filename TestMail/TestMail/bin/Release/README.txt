@@ -1,16 +1,15 @@
-# test-gmail
 This application provides two tests for Google Mail service (gmail.com) functional testing.
 
 Set up TestMail.exe.conf file - modify TestMail.exe.conf.sample and save as TestMail.exe.conf. Configuration file must be stored in the same folder where .exe file is.
 
 Parameters (key values) to be set:
-driverPath = Path to chromedriver.exe
-browser = one of two predefined names of browsers - Firefox or Chrome (Default browser to be run is Firefox)
-username = email address for Gmail
-password = password
-test_to_run = name of test to run or ALL
-logging = type 'true' to enable logging or 'false' to disable
-test_message = the last received message subject
+<driverPath> = Path to chromedriver.exe
+<browser> = one of two predefined names of browsers - Firefox or Chrome (Default browser to be run is Firefox.)
+<username> = email address for Gmail
+<password> = password
+<test_to_run> = name of test to run or ALL
+<logging> = type 'on' to enable logging or leave empty to disable
+<test_message> = the last received message subject
 
 Available tests to run:
 - send_email:
@@ -24,9 +23,11 @@ Available tests to run:
 
 To run tests via Chrome browser key <driverPath> should be specified.
 
-To run tests - use CLI:
-E.g.: C:\Users\Liubov\Documents\TestRun>TestMail.exe TestMail.exe.config
+To run tests use CLI:
+C:\>[path to TestMail.exe]\TestMail.exe TestMail.exe.config
 
 If logging is enabled test run is logged to file test-log.txt
 
 Known issues: when both tests are run sequentially in one Test Run and "send_email" fails - we are unable to run "receive_email" (do not know which email to expect).
+
+

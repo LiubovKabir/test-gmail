@@ -1,73 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace TestMail
 {
     public class LoginPage
-    {
-        private WebElements wbElements;
+    {        
+        private Browser webbrowser;
 
-        private By loginTextBox = By.Id("Email");
-        private By nexButton = By.Id("next");
-        private By psswdTextBox = By.Id("Passwd");
-        private By loginButton = By.Id("signIn");
-        private By errorLoginMsgTxt = By.Id("errormsg_0_Email");
-        private By errorPasswdMsgTxt = By.Id("errormsg_0_Passwd");
+        private TextBox loginTextBox, psswdTextBox;
+        private Button nextButton, loginButton;
+        private WebElement errorLoginMsgTxt, errorPasswdMsgTxt;
 
-        public LoginPage(WebElements wbElements)
+        public LoginPage(Browser browser, string username, string psswd)
         {
-            this.wbElements = wbElements;
+            webbrowser = browser;
+            loginTextBox = new TextBox(webbrowser, By.Id("Email"), username);
+            psswdTextBox =new TextBox(webbrowser, By.Id("Passwd"), psswd);
+            nextButton = new Button(webbrowser, By.Id("next"));
+            loginButton = new Button(webbrowser, By.Id("signIn"));
+            errorLoginMsgTxt = new WebElement(webbrowser, By.Id("errormsg_0_Email"));
+            errorPasswdMsgTxt = new WebElement(webbrowser, By.Id("errormsg_0_Passwd"));
         }
 
-        public void EnterUserName(String username)
+        public TextBox LoginTxtBox
         {
-            wbElements.EnterText(loginTextBox, username);
+            get { return loginTextBox; }
+        }        
+
+        public void EnterUserName()
+        {            
+            loginTextBox.EnterText();
+            return;
         }
 
-        public void EnterPassword(String passwd)
-        {
-            wbElements.EnterText(psswdTextBox, passwd);
+        public void EnterPassword()
+        {            
+            psswdTextBox.EnterText();
+            return;
         }
 
         public void LogIn()
         {
-            wbElements.ClickOnButton(loginButton);
+            loginButton.ClickOnButton();
+            return;
         }
 
         public void MoveForward()
-        {
-            wbElements.ClickOnButton(nexButton);
-        }
-
-        public void QuitBrowser()
-        {
-            wbElements.QuitBrowser();
-        }      
+        {           
+            nextButton.ClickOnButton();
+            return;
+        }    
 
         public bool IsLoginErrorMessagePresent()
-        {
-            return wbElements.IsElementDiplayed(errorLoginMsgTxt);
+        {            
+            return errorLoginMsgTxt.IsElementDiplayed();
         }
 
         public string GetLoginErrorMessage()
-        {
-            return wbElements.GetElementText(errorLoginMsgTxt);
+        {            
+            return errorLoginMsgTxt.GetElementText();
         }
 
         public bool IsPasswordErrorMessagePresent()
         {
-            return wbElements.IsElementDiplayed(errorPasswdMsgTxt);
+            return errorPasswdMsgTxt.IsElementDiplayed();
         }
 
         public string GetPasswordErrorMessage()
         {
-            return wbElements.GetElementText(errorPasswdMsgTxt);
+            return errorPasswdMsgTxt.GetElementText();
         }
 
+        public string GetPageTitle()
+        {
+            return webbrowser.Driver.Title;
+        }
        
     }
 }

@@ -8,18 +8,18 @@ namespace TestMail
 {
     public class Browser
     {
-        private IWebDriver driver;
+        private IWebDriver driver;       
 
         public Browser()
-        {
-            driver = StartBrowser(Program.settings["browser"], Program.settings["url"], Program.settings["driverPath"]);
+        {            
+            driver = StartBrowser(Program.Settings["browser"], Program.Settings["url"], Program.Settings["driverPath"]);
         }
 
         public IWebDriver Driver
         {
             get { return driver; }
         }
-
+        
         public void Quit()
         {
             if (driver == null) return;
@@ -33,6 +33,7 @@ namespace TestMail
         private IWebDriver StartBrowser(string browser, string url, string driverPath)
         {
             IWebDriver webdriver;
+            Logger.DeleteOldLogFile();          
             switch (browser)
             {
                 case "Firefox":
@@ -48,8 +49,10 @@ namespace TestMail
                         webdriver = null;
                     }
                     break;
-                default:                    
-                    Console.WriteLine("browser : " + browser + " is invalid, Launching Firefox as default browser");
+                default:                              
+                    //Logging
+                    string appendText = "browser : " + browser + " is invalid, Launching Firefox as default browser";
+                    Logger.WriteLine(new[] { appendText });
                     webdriver = StartFirefox(url);
                     break;
             }
@@ -58,12 +61,22 @@ namespace TestMail
                 try
                 {
                     webdriver.Navigate().GoToUrl(url);
-                    Assert.AreEqual("Gmail", webdriver.Title, "Unable to reach gmail.com website");
+                    Assert.AreEqual("Gmail", webdriver.Title);
                 }
                 catch (AssertionException)
-                { }
+                {
+                    //Logging
+                    Logger.WriteLine(new[] { "Unable to reach gmail.com website" });
+                }
                 webdriver.Manage().Window.Maximize();
-            }            
+            } 
+            else
+            {
+                //Logging
+                string appendText = "Unable to open Chrome Browser. Please check your configuration file";
+                Logger.WriteLine(new[] { appendText });
+            }
+                       
             return webdriver;
         }
 
@@ -77,6 +90,6 @@ namespace TestMail
 
             IWebDriver webdriver = new FirefoxDriver(firefoxProfile);            
             return webdriver;
-        }      
+        }
     }
 }

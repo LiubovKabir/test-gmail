@@ -15,6 +15,6 @@ C:\Users\MissPolianna\Documents\Visual Studio 2015\Projects\TestMail\TestMail\bi
 C:\Users\MissPolianna\Documents\Visual Studio 2015\Projects\TestMail\TestMail\bin\Release\WebDriver.xml
 C:\Users\MissPolianna\Documents\Visual Studio 2015\Projects\TestMail\TestMail\bin\Release\WebDriver.Support.pdb
 C:\Users\MissPolianna\Documents\Visual Studio 2015\Projects\TestMail\TestMail\bin\Release\WebDriver.Support.xml
-C:\Users\MissPolianna\Documents\Visual Studio 2015\Projects\TestMail\TestMail\obj\Release\TestMail.csprojResolveAssemblyReference.cache
 C:\Users\MissPolianna\Documents\Visual Studio 2015\Projects\TestMail\TestMail\obj\Release\TestMail.exe
 C:\Users\MissPolianna\Documents\Visual Studio 2015\Projects\TestMail\TestMail\obj\Release\TestMail.pdb
+C:\Users\MissPolianna\Documents\Visual Studio 2015\Projects\TestMail\TestMail\obj\Release\TestMail.csprojResolveAssemblyReference.cache

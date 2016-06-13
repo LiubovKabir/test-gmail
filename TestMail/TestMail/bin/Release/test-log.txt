@@ -1,4 +1,8 @@
+browser : Chroe is invalid, Launching Firefox as default browser
 Test Run Summary:
-20.04.2016 8:56:26
-"send email" test:OK
-"receive email" test: OK
+13.06.2016 15:03:09
+"send email" test:
+OK
+"receive email" test: 
+OK
+---- DONE ----
