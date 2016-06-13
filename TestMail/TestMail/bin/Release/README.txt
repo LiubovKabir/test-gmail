@@ -8,7 +8,7 @@ Parameters (key values) to be set:
 <username> = email address for Gmail
 <password> = password
 <test_to_run> = name of test to run or ALL
-<logging> = type 'on' to enable logging or leave empty to disable
+<logging> = type 'true' to enable logging or 'false' to disable
 <test_message> = the last received message subject
 
 Available tests to run:
